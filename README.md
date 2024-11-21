@@ -2,7 +2,7 @@
 
 
 > **FLAME: Frozen Large Language Models Enable Data-Efficient Language-Image Pre-training** <br>
-<a>Anjia Cao</a>,</span> <a>Xing Wei</a>,</span> <a>Zhiheng Ma</a></span>
+<a>Anjia Cao</a>,</span> <a>Xing Wei</a>,</span> <a>Zhiheng Ma</a><br>
 [Paper](https://arxiv.org/abs/2411.11927) | [Data]()
 
 
@@ -14,9 +14,9 @@
 - 🔥 Generalizing from monolingual training to **multilingual** evaluation.
 - 🔥 Strong improvement on long/short-context image-text retrieval, image classification, and multilingual scenarios.
 
-<img src="figures\long_context.png" alt="Image 1" style="max-width: 60%; height: auto;">
+<img src="figures\long_context.png" style="vertical-align: -10px; display: block; margin-left: auto; margin-right: auto;" height="144px" width="301px">
 
-<img src="figures\multilingual_t2i_radar.png" alt="Image 2" style="max-width: 60%; height: auto;">
+<img src="figures\multilingual_t2i_radar.png" style="vertical-align: -10px; display: block; margin-left: auto; margin-right: auto;" height="383px" width="331px">
 
 ## 📅 TODO Roadmap
 
