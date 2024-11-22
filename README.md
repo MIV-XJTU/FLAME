@@ -92,6 +92,6 @@ If you find our work helpful for your research, please consider giving a star an
 }
 ```
 
-### Acknowledgements
+### 🫡 Acknowledgements
 This project is based on [open_clip](https://github.com/mlfoundations/open_clip), and thanks for the nice work! 
 We also thank [CLIP_benchmark](https://github.com/LAION-AI/CLIP_benchmark), [DreamLIP](https://github.com/zyf0619sjtu/DreamLIP), [Long-CLIP](https://github.com/beichenzbc/Long-CLIP), and [PromptEOL](https://github.com/kongds/scaling_sentemb) for their codes.
