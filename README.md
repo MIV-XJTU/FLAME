@@ -10,12 +10,12 @@
 - [2024/11/18] [Paper](https://arxiv.org/abs/2411.11927) on arXiv.
 
 ## 💡 Highlights
-- 🔥 Leveraging frozen LLMs to **directly process long text inputs**.
+- 🔥 Leveraging frozen LLMs to **naturally process long text inputs**.
 - 🔥 Generalizing from monolingual training to **multilingual** evaluation.
 - 🔥 Strong improvement on long/short-context image-text retrieval, image classification, and multilingual scenarios.
 
-<img src="figures\long_context.png" style="vertical-align: -10px; display: block; margin-left: auto; margin-right: auto;" height="144px" width="301px">
-
+<img src="figures\long_context_1.png" style="vertical-align: -10px; display: block; margin-left: auto; margin-right: auto;" height="130px" width="290px">
+<img src="figures\long_context_2.png" style="vertical-align: -10px; display: block; margin-left: auto; margin-right: auto;" height="130px" width="290px">
 <img src="figures\multilingual_t2i_radar.png" style="vertical-align: -10px; display: block; margin-left: auto; margin-right: auto;" height="383px" width="331px">
 
 ## 📅 TODO Roadmap
@@ -94,4 +94,4 @@ If you find our work helpful for your research, please consider giving a star an
 
 ### Acknowledgements
 This project is based on [open_clip](https://github.com/mlfoundations/open_clip), and thanks for the nice work! 
-We also thank [DreamLIP](https://github.com/zyf0619sjtu/DreamLIP) and [Long-CLIP](https://github.com/beichenzbc/Long-CLIP) for their codes.
+We also thank [CLIP_benchmark](https://github.com/LAION-AI/CLIP_benchmark), [DreamLIP](https://github.com/zyf0619sjtu/DreamLIP), [Long-CLIP](https://github.com/beichenzbc/Long-CLIP), and [PromptEOL](https://github.com/kongds/scaling_sentemb) for their codes.
