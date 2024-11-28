@@ -27,7 +27,7 @@
 - [x] Release pre-trained checkpoints.
 
 ## 🛠️ Get Started
-#### Setup
+### Setup
 ```
 git clone https://github.com/MIV-XJTU/FLAME.git
 cd FLAME
@@ -38,10 +38,10 @@ make install-training
 make install-test
 ```
 
-#### Evaluation
+### Evaluation
 See [Evaluation.md](./Evaluation.md).
 
-## 🔐 Pretrained Checkpoints
+## 🔐 Pre-trained Checkpoints
 <table><tbody>
 <!-- START TABLE -->
 <!-- TABLE HEADER -->
@@ -72,7 +72,7 @@ See [Evaluation.md](./Evaluation.md).
 </tr>
 </tbody></table>
 
-## License
+## 🛂 License
 
 The project is under a standard Creative Common [CC-BY-4.0 License](./LICENSE).
 
