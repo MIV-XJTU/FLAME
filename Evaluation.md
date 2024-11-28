@@ -1,7 +1,7 @@
 ## Evaluation
 
 * **Inference with multiple prompts.**
-Set ```multi_template=True``` of ```encode_text()``` in [src/open_clip/model.py](./src/open_clip/model.py).
+Set ```multi_template=True``` of ```encode_text()``` in [src/open_clip/model.py](./src/open_clip/model.py#L450).
   * [ShareGPT4V](https://huggingface.co/datasets/Lin-Chen/ShareGPT4V/blob/main/share-captioner_coco_lcs_sam_1246k_1107.json), [Urban-1k](https://huggingface.co/datasets/BeichenZhang/Urban1k/blob/main/Urban1k.zip), [DCI](https://github.com/facebookresearch/DCI), and [DOCCI](https://google.github.io/docci/#downloads):
     ```
     cd src
@@ -42,7 +42,7 @@ Set ```multi_template=True``` of ```encode_text()``` in [src/open_clip/model.py]
     --output ./outputs/compositionality/{dataset}.json 
     ```
 * **Inference with single prompt.**
-Set ```multi_template=False``` of ```encode_text()``` in [src/open_clip/model.py](./src/open_clip/model.py).
+Set ```multi_template=False``` of ```encode_text()``` in [src/open_clip/model.py](./src/open_clip/model.py#L450).
   * [Crossmodal3600](https://google.github.io/crossmodal-3600):
     ```
     cd $path_to_clip_benchmark$/benchmark
@@ -71,7 +71,7 @@ Set ```multi_template=False``` of ```encode_text()``` in [src/open_clip/model.py
     --batch_size 64
     ```
   * Linear-probe classification:
-    Set ```visual_only=True``` of ```encode_image()``` in [src/open_clip/model.py](./src/open_clip/model.py).
+    Set ```visual_only=True``` of ```encode_image()``` in [src/open_clip/model.py](./src/open_clip/model.py#L442).
     ```
     cd $path_to_clip_benchmark$/benchmark
 
