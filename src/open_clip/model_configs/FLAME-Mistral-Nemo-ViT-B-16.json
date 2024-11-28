@@ -1,0 +1,25 @@
+{
+    "embed_dim": 512,
+    "vision_cfg": {
+        "image_size": 224,
+        "layers": 12,
+        "width": 768,
+        "patch_size": 16,
+        "pool_type": "avg"
+    },
+    "mm_cfg": {
+        "mm_projector": true,
+        "width": 768,
+        "mlp_depth": 2,
+        "projector_dim": 5120
+    },
+    "text_cfg": {
+        "context_length": 1024,
+        "llm_model_name": "mistralai/Mistral-Nemo-Instruct-2407",
+        "llm_tokenizer_name": "mistralai/Mistral-Nemo-Instruct-2407",
+        "layer": "39",
+        "load_in_8bit": false,
+        "embedding_method": "multiprompteol"
+    },
+    "custom_text": true
+}

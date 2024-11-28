@@ -3,10 +3,12 @@
 
 > **FLAME: Frozen Large Language Models Enable Data-Efficient Language-Image Pre-training** <br>
 <a>Anjia Cao</a>,</span> <a>Xing Wei</a>,</span> <a>Zhiheng Ma</a><br>
-[Paper](https://arxiv.org/abs/2411.11927) | [Data]()
+[Paper](https://arxiv.org/abs/2411.11927) | [Model](https://huggingface.co/caj/FLAME-ViT-B-16) | [Data]()
 
 
 ## 📰 News
+- [2024/11/28] [Model](https://huggingface.co/caj/FLAME-ViT-B-16) on Hugging Face.
+- [2024/11/28] Release evaluation code.
 - [2024/11/18] [Paper](https://arxiv.org/abs/2411.11927) on arXiv.
 
 ## 💡 Highlights
@@ -21,8 +23,8 @@
 ## 📅 TODO Roadmap
 
 - [ ] Release training code and data.
-- [ ] Release evaluation code.
-- [ ] Release pre-trained checkpoints.
+- [x] Release evaluation code.
+- [x] Release pre-trained checkpoints.
 
 ## 🛠️ Get Started
 #### Setup
@@ -37,18 +39,7 @@ make install-test
 ```
 
 #### Evaluation
-Evaluate long-context retrieval.
-```
-TODO
-```
-
-Evaluate CLIP Benchmark (e.g. zero-shot classification, linear-probe classfication).
-```
-TODO
-```
-
-#### Training
-TODO
+See [Evaluation.md](./Evaluation.md).
 
 ## 🔐 Pretrained Checkpoints
 <table><tbody>
@@ -62,7 +53,7 @@ TODO
 <tr>
 <td align="center">CC3M</td>
 <td align="center">ViT-B/16</td>
-<td align="center">TODO</td>
+<td align="center"><a href="https://huggingface.co/caj/FLAME-ViT-B-16/blob/main/FLAME-CC3M-ViT-B-16.pt">Hugging Face</a></td>
 </tr>
 <tr>
 <td align="center">CC3M</td>
@@ -72,7 +63,7 @@ TODO
 <tr>
 <td align="center">YFCC15M</td>
 <td align="center">ViT-B/16</td>
-<td align="center">TODO</td>
+<td align="center"><a href="https://huggingface.co/caj/FLAME-ViT-B-16/blob/main/FLAME-YFCC15M-ViT-B-16.pt">Hugging Face</a></td>
 </tr>
 <tr>
 <td align="center">YFCC15M</td>
@@ -81,17 +72,21 @@ TODO
 </tr>
 </tbody></table>
 
+## License
+
+The project is under a standard Creative Common [CC-BY-4.0 License](./LICENSE).
+
 ## 📖 Citation
 If you find our work helpful for your research, please consider giving a star and citation.
 ```bibtex
 @article{cao2024flame,
-  title={Flame: Frozen large language models enable data-efficient language-image pre-training},
+  title={FLAME: Frozen Large Language Models Enable Data-Efficient Language-Image Pre-training},
   author={Cao, Anjia and Wei, Xing and Ma, Zhiheng},
   journal={arXiv preprint arXiv:2411.11927},
   year={2024}
 }
 ```
 
-### 🫡 Acknowledgements
+## 🫡 Acknowledgements
 This project is based on [open_clip](https://github.com/mlfoundations/open_clip), and thanks for the nice work! 
 We also thank [CLIP_benchmark](https://github.com/LAION-AI/CLIP_benchmark), [DreamLIP](https://github.com/zyf0619sjtu/DreamLIP), [Long-CLIP](https://github.com/beichenzbc/Long-CLIP), and [PromptEOL](https://github.com/kongds/scaling_sentemb) for their codes.

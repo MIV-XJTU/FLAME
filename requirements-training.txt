@@ -1,0 +1,15 @@
+torch==2.3.0
+torchvision
+webdataset>=0.2.5
+regex
+ftfy
+tqdm
+pandas
+braceexpand
+huggingface-hub==0.24.2
+transformers==4.43.2
+timm>=0.9.8
+fsspec
+sentencepiece==0.2.0
+protobuf==4.25.3
+opencv-python
