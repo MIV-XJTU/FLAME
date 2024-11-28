@@ -1,6 +1,6 @@
 ## Evaluation
 
-* **For long text inputs, inference with multiple prompts.**
+* **Inference with multiple prompts.**
 Set ```multi_template=True``` of ```encode_text()``` in [src/open_clip/model.py](./src/open_clip/model.py).
   * [ShareGPT4V](https://huggingface.co/datasets/Lin-Chen/ShareGPT4V/blob/main/share-captioner_coco_lcs_sam_1246k_1107.json), [Urban-1k](https://huggingface.co/datasets/BeichenZhang/Urban1k/blob/main/Urban1k.zip), [DCI](https://github.com/facebookresearch/DCI), and [DOCCI](https://google.github.io/docci/#downloads):
     ```
@@ -41,7 +41,7 @@ Set ```multi_template=True``` of ```encode_text()``` in [src/open_clip/model.py]
     --model FLAME-ViT-B-16 \
     --output ./outputs/compositionality/{dataset}.json 
     ```
-* **For short text inputs, inference with single prompt.**
+* **Inference with single prompt.**
 Set ```multi_template=False``` of ```encode_text()``` in [src/open_clip/model.py](./src/open_clip/model.py).
   * [Crossmodal3600](https://google.github.io/crossmodal-3600):
     ```
