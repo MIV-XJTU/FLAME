@@ -6,7 +6,7 @@ Set ```multi_template_=True``` of ```encode_text()``` in ```src/open_clip/model.
     ```
     cd src
     CUDA_VISIBLE_DEVICES=0 python -u training/eval_$dataset$.py \
-    --model FLAME-Mistral-ViT-B-16 \
+    --model FLAME-ViT-B-16 \
     --pretrained $path_to_ckpt$
     ```
   * [MSCOCO](https://huggingface.co/datasets/clip-benchmark/wds_mscoco_captions) and [Flickr30k](https://huggingface.co/datasets/clip-benchmark/wds_flickr30k):
@@ -17,7 +17,7 @@ Set ```multi_template_=True``` of ```encode_text()``` in ```src/open_clip/model.
     --dataset_root $path_to_dataset$ \
     --task zeroshot_retrieval \
     --pretrained $path_to_ckpt$ \
-    --model FLAME-Mistral-Nemo-ViT-B-16 \
+    --model FLAME-ViT-B-16 \
     --output ./outputs/zs_retrieval/$dataset$.json \
     --batch_size 64 \
     --recall_k 1 5 10
@@ -31,7 +31,7 @@ Set ```multi_template_=False``` of ```encode_text()``` in ```src/open_clip/model
     --dataset crossmodal3600 \
     --task zeroshot_retrieval \
     --pretrained $path_to_ckpt$ \
-    --model FLAME-Mistral-Nemo-ViT-B-16 \
+    --model FLAME-ViT-B-16 \
     --output ./outputs/multilingual_retrieval/crossmodal_{language}.json \
     --batch_size 16 \
     --language ar bn cs da de el en es fa fi fil fr he hi hr hu id it ja ko mi nl no pl pt quz ro ru sv sw te th tr uk vi zh \
@@ -45,7 +45,7 @@ Set ```multi_template_=False``` of ```encode_text()``` in ```src/open_clip/model
     --dataset_root $path_to_dataset$ \
     --task zeroshot_classification \
     --pretrained $path_to_ckpt$ \
-    --model FLAME-Mistral-Nemo-ViT-B-16 \
+    --model FLAME-ViT-B-16 \
     --output ./outputs/zs_classification/$dataset$.json \
     --batch_size 64
     ```
@@ -57,7 +57,7 @@ Set ```multi_template_=False``` of ```encode_text()``` in ```src/open_clip/model
     --dataset_root $path_to_dataset$ \
     --task linear_probe \
     --pretrained $path_to_ckpt$ \
-    --model FLAME-Mistral-Nemo-ViT-B-16 \
+    --model FLAME-ViT-B-16 \
     --output ./outputs/lp_classification/$dataset$.json \
     --batch_size 64 \
     --fewshot_lr 0.1 \
@@ -74,7 +74,7 @@ Set ```multi_template_=False``` of ```encode_text()``` in ```src/open_clip/model
     --dataset_root $path_to_imagenet1k$ \
     --task zeroshot_classification \
     --pretrained $path_to_ckpt$ \
-    --model FLAME-Mistral-Nemo-ViT-B-16 \
+    --model FLAME-ViT-B-16 \
     --output ./outputs/multilingual_classification/imagenet1k_{language}.json \
     --batch_size 64 \
     --language ar en jp it cn 
