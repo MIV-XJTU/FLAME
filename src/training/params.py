@@ -464,6 +464,24 @@ def parse_args(args):
         action="store_true",
         help='Use SigLip (sigmoid) loss.'
     )
+    parser.add_argument(
+        "--use-dataaug",
+        default=False,
+        action="store_true",
+        help="Whether to use dataaug."
+    )
+    parser.add_argument(
+        "--mp-siglip",
+        default=False,
+        action="store_true",
+        help='Use MultiPositiveSigLip (multi-positive sigmoid) loss.'
+    )
+    parser.add_argument(
+        "--mp-nce",
+        default=False,
+        action="store_true",
+        help='Use MultiPositiveNCE (multi-positive nce) loss.'
+    )
 
     args = parser.parse_args(args)
 

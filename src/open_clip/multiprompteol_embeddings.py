@@ -72,7 +72,8 @@ class MultiPromptEOLEmbeddingsLLM(nn.Module):
             print('embedding with multiple templates')
             embeddings = []
 
-            attention_mask = torch.tril(torch.ones((batch_size, seq_length, seq_length), dtype=dtype, device=input_ids.device))
+            attention_mask_ = torch.tril(torch.ones((batch_size, seq_length, seq_length), dtype=dtype, device=input_ids.device))
+            attention_mask = attention_mask.unsqueeze(-1) * attention_mask_
             quote_token_id = input_ids[0, -1]
             
             quote_indices = torch.where(input_ids[0] == quote_token_id)[0]

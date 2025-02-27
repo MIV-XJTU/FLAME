@@ -412,3 +412,225 @@ class SigLipLoss(nn.Module):
                     text_features_to_right = text_features_from_left
 
         return {"contrastive_loss": loss} if output_dict else loss
+
+
+class MultiPositiveSigmoidLoss(nn.Module):
+    """ Sigmoid Loss for Language Image Pre-Training (SigLIP) - https://arxiv.org/abs/2303.15343
+
+    @article{zhai2023sigmoid,
+      title={Sigmoid loss for language image pre-training},
+      author={Zhai, Xiaohua and Mustafa, Basil and Kolesnikov, Alexander and Beyer, Lucas},
+      journal={arXiv preprint arXiv:2303.15343},
+      year={2023}
+    }
+    """
+    def __init__(
+            self,
+            cache_labels=False,
+            rank=0,
+            world_size=1,
+            bidir=True,
+            use_horovod=False,
+    ):
+        super().__init__()
+        self.cache_labels = cache_labels
+        self.rank = rank
+        self.world_size = world_size
+        assert not use_horovod  # FIXME need to look at hvd ops for ring transfers
+        self.use_horovod = use_horovod
+        self.bidir = bidir
+
+        # cache state FIXME cache not currently used, worthwhile?
+        self.prev_num_logits = 0
+        self.labels = {}
+
+    def get_ground_truth(self, device, dtype, num_logits, mp, negative_only=False) -> torch.Tensor:
+        # mp = 6
+        labels = -torch.ones((num_logits, mp * num_logits), device=device, dtype=dtype)
+        if not negative_only:
+            num_ones = mp
+            num_zeros = mp * num_logits - num_ones
+            positive = torch.zeros(num_logits, mp * num_logits, device=device, dtype=dtype)
+            # for i in range(num_logits):
+            #     start_index = i * mp
+            #     positive[i, start_index: start_index + num_ones] = 2
+
+            start_indices = torch.arange(num_logits) * mp
+            # 生成一个从0到num_ones-1的张量，用于确定每个1在行中的相对位置
+            relative_indices = torch.arange(num_ones)
+
+            # 使用广播将 start_indices 和 relative_indices 相加，得到所有1的确切位置
+            # 然后使用这些索引更新张量中的值
+            positive[torch.arange(num_logits)[:, None], (start_indices[:, None] + relative_indices).clamp(max=mp*num_logits-1)] = 2
+
+            labels = positive + labels
+            # print(labels)
+            # exit(-1)
+
+        return labels
+
+    def get_logits(self, image_features, text_features, logit_scale, logit_bias=None):
+        logits = logit_scale * image_features @ text_features.T
+        if logit_bias is not None:
+            logits += logit_bias
+        return logits
+
+    def _loss(self, image_features, text_features, logit_scale, logit_bias=None, negative_only=False):
+        mp = text_features.shape[0] // image_features.shape[0]
+        logits = self.get_logits(image_features, text_features, logit_scale, logit_bias)
+        labels = self.get_ground_truth(
+            image_features.device,
+            image_features.dtype,
+            image_features.shape[0],
+            mp,
+            negative_only=negative_only,
+        )
+        loss = -F.logsigmoid(labels * logits).sum() / text_features.shape[0]
+        return loss
+
+    def forward(self, image_features, text_features, logit_scale, logit_bias, output_dict=False):
+        loss = self._loss(image_features, text_features, logit_scale, logit_bias)
+
+        if self.world_size > 1:
+            # exchange text features w/ neighbour world_size - 1 times
+            right_rank = (self.rank + 1) % self.world_size
+            left_rank = (self.rank - 1 + self.world_size) % self.world_size
+            if self.bidir:
+                text_features_to_right = text_features_to_left = text_features
+                num_bidir, remainder = divmod(self.world_size - 1, 2)
+                for i in range(num_bidir):
+                    text_features_recv = neighbour_exchange_bidir_with_grad(
+                        left_rank,
+                        right_rank,
+                        text_features_to_left,
+                        text_features_to_right,
+                    )
+
+                    for f in text_features_recv:
+                        loss += self._loss(
+                            image_features,
+                            f,
+                            logit_scale,
+                            logit_bias,
+                            negative_only=True,
+                        )
+                    text_features_to_left, text_features_to_right = text_features_recv
+
+                if remainder:
+                    text_features_recv = neighbour_exchange_with_grad(
+                        left_rank, right_rank, text_features_to_right)
+
+                    loss += self._loss(
+                        image_features,
+                        text_features_recv,
+                        logit_scale,
+                        logit_bias,
+                        negative_only=True,
+                    )
+            else:
+                text_features_to_right = text_features
+                for i in range(self.world_size - 1):
+                    text_features_from_left = neighbour_exchange_with_grad(
+                        left_rank, right_rank, text_features_to_right)
+
+                    loss += self._loss(
+                        image_features,
+                        text_features_from_left,
+                        logit_scale,
+                        logit_bias,
+                        negative_only=True,
+                    )
+                    text_features_to_right = text_features_from_left
+
+        return {"contrastive_loss": loss} if output_dict else loss
+
+
+class MultiPositiveNCELoss(ClipLoss):
+
+    def __init__(
+            self,
+            local_loss=False,
+            gather_with_grad=False,
+            cache_labels=False,
+            rank=0,
+            world_size=1,
+            use_horovod=False,
+    ):
+        super().__init__()
+        self.local_loss = local_loss
+        self.gather_with_grad = gather_with_grad
+        self.cache_labels = cache_labels
+        self.rank = rank
+        self.world_size = world_size
+        assert not use_horovod  # FIXME need to look at hvd ops for ring transfers
+        self.use_horovod = use_horovod
+
+        # cache state
+        self.prev_num_logits = 0
+        self.labels = {}
+
+    def get_ground_truth(self, device, num_logits_image, num_logits_text) -> torch.Tensor:
+        # calculated ground-truth and cache if enabled
+        if self.prev_num_logits != num_logits_text or device not in self.labels:
+            num_positive = num_logits_text // num_logits_image
+            eye = torch.eye(num_logits_image, device=device)
+            labels = torch.arange(num_logits_image, device=device, dtype=torch.long)
+            # labels_image: [N, K, 5K], labels_text: [N, 5K, K]
+            labels_image = labels.repeat(num_positive)
+            labels_text = torch.zeros(size=(num_logits_text, num_logits_image), device=device)
+            # labels_text = labels_image.T.detach().clone()
+            start_index = 0
+            for i in range(num_logits_image):
+                end_index = start_index + num_positive
+                # labels_image[:, start_index:end_index] = eye[:, i].detach().clone().unsqueeze(1).repeat(1, num_positive)
+                labels_text[start_index:end_index, :] = eye[i, :].detach().clone().unsqueeze(0).repeat(num_positive, 1)
+                start_index = end_index
+
+            if self.cache_labels:
+                self.labels[device] = {'labels_image': labels_image, 'labels_text': labels_text}
+                self.prev_num_logits = num_logits_text
+        else:
+            labels_image = self.labels[device]['labels_image']
+            labels_text = self.labels[device]['labels_text']
+
+        return labels_image, labels_text
+
+    def get_logits(self, image_features, text_features, logit_scale):
+        if self.world_size > 1:
+            all_image_features, all_text_features = gather_features(
+                image_features, text_features,
+                self.local_loss, self.gather_with_grad, self.rank, self.world_size, self.use_horovod)
+
+            if self.local_loss:
+                logits_per_image = logit_scale * image_features @ all_text_features.T
+                logits_per_text = logit_scale * text_features @ all_image_features.T
+                raise NotImplementedError("local loss is not appliable yet.")
+            else:
+                logits_per_image = logit_scale * all_image_features @ all_text_features.T
+                logits_per_text = logits_per_image.T
+        else:
+            logits_per_image = logit_scale * image_features @ text_features.T
+            logits_per_text = logit_scale * text_features @ image_features.T
+        
+        return logits_per_image, logits_per_text
+    
+    def forward(self, image_features, text_features, logit_scale, output_dict=False):
+        device = image_features.device
+        logits_per_image, logits_per_text = self.get_logits(image_features, text_features, logit_scale)
+        
+        labels_image, labels_text = self.get_ground_truth(device, logits_per_image.shape[0], logits_per_image.shape[1])
+
+        t2i_loss = 0.
+        num_positive = logits_per_image.shape[1] // logits_per_image.shape[0]
+        logits_per_image_cat = torch.cat([logits_per_image[:, i::num_positive] for i in range(num_positive)])
+        t2i_loss += F.cross_entropy(logits_per_image_cat, labels_image)
+
+        i2t_loss = F.cross_entropy(logits_per_text, labels_text)
+
+        total_loss = (
+            t2i_loss +
+            i2t_loss
+        ) / 2
+        
+        return {"contrastive_loss": total_loss} if output_dict else total_loss
+

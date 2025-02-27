@@ -1,4 +1,4 @@
-# FLAME
+# CVPR 2025 | FLAME
 
 
 > **FLAME: Frozen Large Language Models Enable Data-Efficient Language-Image Pre-training** <br>
@@ -7,6 +7,7 @@
 
 
 ## 📰 News
+- [2025/02/27] Accepted by CVPR 2025.
 - [2024/11/28] [Model](https://huggingface.co/caj/FLAME-ViT-B-16) on Hugging Face.
 - [2024/11/28] Release evaluation code.
 - [2024/11/18] [Paper](https://arxiv.org/abs/2411.11927) on arXiv.
