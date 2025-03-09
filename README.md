@@ -9,7 +9,7 @@
 - [2025/03/09] Release training code.
 - [2025/03/08] [Dataset](https://arxiv.org/abs/2411.11927) on Hugging Face.
 - [2025/02/27] Accepted by CVPR 2025.
-- [2024/11/28] [Model](https://huggingface.co/caj/FLAME-ViT-B-16-Mistral-Nemo) on Hugging Face.
+- [2024/11/28] [Model](https://huggingface.co/caj/FLAME-Mistral-Nemo-ViT-B-16) on Hugging Face.
 - [2024/11/28] Release evaluation code.
 - [2024/11/18] [Paper](https://arxiv.org/abs/2411.11927) on arXiv.
 
@@ -74,12 +74,12 @@ See [Evaluation.md](./Evaluation.md).
 <tr>
 <td align="center">CC3M</td>
 <td align="center">ViT-B/16-Mistral-Nemo</td>
-<td align="center"><a href="https://huggingface.co/caj/FLAME-ViT-B-16-Mistral-Nemo">Hugging Face</a></td>
+<td align="center"><a href="https://huggingface.co/caj/FLAME-Mistral-Nemo-ViT-B-16">Hugging Face</a></td>
 </tr>
 <tr>
 <td align="center">YFCC15M</td>
 <td align="center">ViT-B/16-Mistral-Nemo</td>
-<td align="center"><a href="https://huggingface.co/caj/FLAME-ViT-B-16-Mistral-Nemo">Hugging Face</a></td>
+<td align="center"><a href="https://huggingface.co/caj/FLAME-Mistral-Nemo-ViT-B-16">Hugging Face</a></td>
 </tr>
 <tr>
 <td align="center">Merged-2B</td>
