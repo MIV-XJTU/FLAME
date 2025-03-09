@@ -30,7 +30,7 @@ CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 nohup   torchrun  --nproc_per_node 8 -m --m
     --train-data '/data1/huggingface/hub/datasets--pixparse--cc3m-wds/snapshots/46f3d69f840e59d77d52e8decfe5baec97e94c7f/cc3m-train-{0000..0575}.tar' \
     --imagenet-val /data1/imagenet/val/ \
     --zeroshot-frequency 2 \
-    --batch-size 512 \
+    --batch-size 384 \
     --accum-freq 1 \
     --lr 5e-4 \
     --beta1 0.9 \
