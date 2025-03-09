@@ -1,4 +1,4 @@
-## Download Our Recaptioned Data
+## Download the Original Data & Our Recaptioned Data
 
 [Download Link for Our Recaptioned CC3M](https://huggingface.co/datasets/caj/FLAME-ReCap-CC3M-MiniCPM-Llama3-V-2_5)
 
@@ -10,6 +10,8 @@ Specify a slice of the webdataset for embedding.
 e.g. for part of CC3M:
 
 ```
+cd src
+
 CUDA_VISIBLE_DEVICES=0  nohup python -u training/embed_cc3m_mask.py \
     --model FLAME-Mistral-Nemo-ViT-B-16 \
     --batch-size 32 \
@@ -22,6 +24,8 @@ CUDA_VISIBLE_DEVICES=0  nohup python -u training/embed_cc3m_mask.py \
 ## Training
 
 ```
+cd src
+
 CUDA_VISIBLE_DEVICES=0,1,2,3,4,5,6,7 nohup   torchrun  --nproc_per_node 8 -m --master_port 12345 training.main \
     --train-data '/data1/huggingface/hub/datasets--pixparse--cc3m-wds/snapshots/46f3d69f840e59d77d52e8decfe5baec97e94c7f/cc3m-train-{0000..0575}.tar' \
     --imagenet-val /data1/imagenet/val/ \
