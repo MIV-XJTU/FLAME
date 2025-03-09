@@ -471,7 +471,7 @@ def parse_args(args):
         help="Whether to use dataaug."
     )
     parser.add_argument(
-        "--mp-siglip",
+        "--mp-sigmoid",
         default=False,
         action="store_true",
         help='Use MultiPositiveSigLip (multi-positive sigmoid) loss.'
