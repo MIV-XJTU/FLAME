@@ -6,11 +6,11 @@
 
  
 ## 📰 News
-- [2025/03/09] Release training code.
+- [2025/03/09] Release training code and [scripts](./Training.md).
 - [2025/03/08] [Recaptioned CC3M](https://huggingface.co/datasets/caj/FLAME-ReCap-CC3M-MiniCPM-Llama3-V-2_5) and [Recaptioned YFCC15M](https://huggingface.co/datasets/caj/FLAME-ReCap-YFCC15M-MiniCPM-Llama3-V-2_5) on Hugging Face.
 - [2025/02/27] Accepted by CVPR 2025.
 - [2024/11/28] [Model](https://huggingface.co/caj/FLAME-Mistral-Nemo-ViT-B-16) on Hugging Face.
-- [2024/11/28] Release evaluation code.
+- [2024/11/28] Release evaluation code and [scripts](./Evaluation.md).
 - [2024/11/18] [Paper](https://arxiv.org/abs/2411.11927) on arXiv.
 
 ## 💡 Highlights
