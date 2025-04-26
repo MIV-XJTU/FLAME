@@ -9,7 +9,7 @@
 - [2025/03/09] Release training codes and [scripts](./Training.md).
 - [2025/03/08] [Recaptioned CC3M](https://huggingface.co/datasets/caj/FLAME-ReCap-CC3M-MiniCPM-Llama3-V-2_5) and [Recaptioned YFCC15M](https://huggingface.co/datasets/caj/FLAME-ReCap-YFCC15M-MiniCPM-Llama3-V-2_5) on Hugging Face.
 - [2025/02/27] Accepted by CVPR 2025.
-- [2024/11/28] [Model](https://huggingface.co/caj/FLAME-Mistral-Nemo-ViT-B-16) on Hugging Face.
+- [2024/11/28] [Model](https://huggingface.co/caj/FLAME-Mistral-Nemo-ViT-B-16-CC3M) on Hugging Face.
 - [2024/11/28] Release evaluation codes and [scripts](./Evaluation.md).
 - [2024/11/18] [Paper](https://arxiv.org/abs/2411.11927) on arXiv.
 
@@ -73,18 +73,8 @@ See [Evaluation.md](./Evaluation.md).
 <!-- TABLE BODY -->
 <tr>
 <td align="center">CC3M</td>
-<td align="center">ViT-B/16-Mistral-Nemo</td>
-<td align="center"><a href="https://huggingface.co/caj/FLAME-Mistral-Nemo-ViT-B-16">Hugging Face</a></td>
-</tr>
-<tr>
-<td align="center">YFCC15M</td>
-<td align="center">ViT-B/16-Mistral-Nemo</td>
-<td align="center"><a href="https://huggingface.co/caj/FLAME-Mistral-Nemo-ViT-B-16">Hugging Face</a></td>
-</tr>
-<tr>
-<td align="center">Merged-2B</td>
-<td align="center">ViT-L/14-Qwen2.5</td>
-<td align="center">TODO</td>
+<td align="center">Mistral-Nemo-ViT-B/16</td>
+<td align="center"><a href="https://huggingface.co/caj/FLAME-Mistral-Nemo-ViT-B-16-CC3M">Hugging Face</a></td>
 </tr>
 </tbody></table>
 
