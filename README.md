@@ -85,11 +85,11 @@ The project is under a standard Creative Common [CC-BY-4.0 License](./LICENSE).
 ## 📖 Citation
 If you find our work helpful for your research, please consider giving a star and citation.
 ```bibtex
-@article{cao2024flame,
+@inproceedings{cao2025flame,
   title={FLAME: Frozen Large Language Models Enable Data-Efficient Language-Image Pre-training},
   author={Cao, Anjia and Wei, Xing and Ma, Zhiheng},
-  journal={arXiv preprint arXiv:2411.11927},
-  year={2024}
+  booktitle={CVPR},
+  year={2025}
 }
 ```
 
